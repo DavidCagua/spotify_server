@@ -9,9 +9,9 @@ const jsonParser = bodyParser.json();
 app.use(cors());
 
 const client = redis.createClient({
-  url: "redis://redis-15031.c14.us-east-1-3.ec2.cloud.redislabs.com:15031",
+  url: process.env.REDIS_URL,
   no_ready_check: true,
-  password: "RQsPzy1o18OYZsEYPGIPKFZ0iU0fMIKr",
+  password: process.env.REDIS_PASSWORD,
 });
 app.post("/history", jsonParser, async (req, res) => {
   try {
