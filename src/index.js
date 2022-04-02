@@ -8,18 +8,15 @@ const redis = require("redis");
 const jsonParser = bodyParser.json();
 app.use(cors());
 
-const client = redis.createClient({
-  url: process.env.REDIS_URL,
-  no_ready_check: true,
-  password: process.env.REDIS_PASSWORD,
-});
+const client = redis.createClient();
 app.post("/history", jsonParser, async (req, res) => {
   try {
     const song = req.body.song;
     await client.connect();
     await client.lPush("history", song);
+    const response = await client.lRange("history", 0, 20);
     await client.disconnect();
-    res.end("ok");
+    res.json(response.map((element) => JSON.parse(element)));
   } catch (e) {
     console.log(e);
   }
