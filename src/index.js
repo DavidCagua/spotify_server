@@ -35,5 +35,5 @@ app.get("/history", async (req, res) => {
     console.log(e);
   }
 });
-app.listen(4000);
+app.listen();
 console.log("server listening");
