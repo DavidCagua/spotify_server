@@ -8,7 +8,11 @@ const redis = require("redis");
 const jsonParser = bodyParser.json();
 app.use(cors());
 
-const client = redis.createClient();
+const client = redis.createClient({
+  url: "redis://redis-15031.c14.us-east-1-3.ec2.cloud.redislabs.com:15031",
+  no_ready_check: true,
+  password: "RQsPzy1o18OYZsEYPGIPKFZ0iU0fMIKr",
+});
 app.post("/history", jsonParser, async (req, res) => {
   try {
     const song = req.body.song;
