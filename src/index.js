@@ -35,5 +35,7 @@ app.get("/history", async (req, res) => {
     console.log(e);
   }
 });
-app.listen();
-console.log("server listening");
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
